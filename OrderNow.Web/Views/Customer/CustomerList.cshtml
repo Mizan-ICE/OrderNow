@@ -1,0 +1,91 @@
+﻿@model List<OrderNow.Web.Models.ViewModel.CustomerVM>
+@{
+    ViewData["Title"] = "CustomerList";
+}
+
+
+<h1>Customer List</h1>
+
+<a class="btn btn-primary btn-sm" asp-controller="Customer" asp-action="Add">Add New</a>
+
+<partial name="_DeleteModalPartial" />
+<table class="table" id="customer">
+    <thead>
+        <tr>
+            <th>Photo</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Orders</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model)
+        {
+            <tr>
+                <td>
+                    @if (!string.IsNullOrEmpty(customer.CustomerPhoto))
+                    {
+                        <img src="@customer.CustomerPhoto" alt="@customer.FirstName" width="50" height="50" class="rounded-circle" />
+                    }
+                    else
+                    {
+                        <span>No Photo</span>
+                    }
+                </td>
+                <td>@customer.FirstName</td>
+                <td>@customer.LastName</td>
+                @if (@customer.Orders?.Count == 0)
+                {
+                    <td>0</td>
+                }
+                else
+                {
+                    <td>
+                        <h5>
+                            <a style="color:dodgerblue" class="link-text" asp-page="/CustomerOrderList" asp-route-Id="@customer.Id"
+                               asp-route-customerName="@customer.FirstName">
+                                <strong>@customer.Orders?.Count</strong>
+                            </a>
+                        </h5>
+                    </td>
+                }
+
+
+                <td>
+                   
+
+                        <a class="link-text btn btn-warning btn-sm" asp-controller="Customer" asp-action="Update" asp-route-id="@customer.Id"><i class="bi bi-pencil-square"></i>Update</a>
+                
+
+                    <button class="btn btn-danger btn-sm open-delete-modal"
+                            data-id="@customer.Id"
+                            data-url="@Url.Action("Delete", "Customer", new { id = customer.Id })">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts
+{
+   
+    <script>
+        $(document).ready(function () {
+             $('.open-delete-modal').on('click', function () {
+                 var id = $(this).data('id');
+                 var url = $(this).data('url');
+
+                 $('#delete-id').val(id);
+                 $('#delete-form').attr('action',url);
+                 $('#modal-delete').modal('show');
+             });
+
+             $('#delete-button').on('click', function () {
+                 $('#delete-form').submit();
+             });
+         });
+    </script>
+}
+

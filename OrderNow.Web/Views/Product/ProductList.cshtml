@@ -1,0 +1,64 @@
+﻿@model IEnumerable<OrderNow.Web.Models.ViewModel.ProductVM>
+
+@{
+    ViewData["Title"] = "Product List";
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 border-primary mb-3">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-12">
+                        <div class="card-header text-light bg-info">
+                            <h5 class="card-title">
+                                @item.ProductName
+                               
+                                    <a class="text-light float-end" asp-action="Update" asp-route-id="@item.Id">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                
+                            </h5>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        @if (!string.IsNullOrEmpty(item.ProductImageUrl))
+                        {
+                            <img src="@item.ProductImageUrl" class="img-fluid" alt="@item.ProductName" />
+                        }
+                        else
+                        {
+                            <img src="~/images/no-image.png" class="img-fluid" alt="No Image" />
+                        }
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <p class="card-text">@item.ProductDescription</p>
+                            <p class="card-text"><b>Category:</b> @item.CategoryId</p>
+                            <p class="card-text"><b>Price:</b> @item.Price.ToString("c")</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="card-footer">
+                            <p class="card-text">
+                                <a class="btn btn-outline-primary float-end" asp-action="Details" asp-route-id="@item.Id">
+                                    <i class="bi bi-eye-fill"></i> Show Details
+                                </a>
+                                <a class="btn btn-success text-light"
+                                   asp-controller="Cart"
+                                   asp-action="AddToCart"
+                                   asp-route-id="@item.Id">
+                                    <i class="bi bi-cart-plus"></i> Add to Cart
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
