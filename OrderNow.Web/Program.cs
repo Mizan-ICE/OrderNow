@@ -24,10 +24,12 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IApplicationUnitOfWork, ApplicationUnitOfWork>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AddDbContext<OrderNowDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("OrdernNowConn"), (x) => x.MigrationsAssembly(migrationAssembly)));
-
-
+builder.Services.AddScoped<ICartItemRepository, CartRepository>(sp => CartRepository.GetCart(sp));
+builder.Services.AddSession();
+builder.Services.AddHttpContextAccessor();
 
 
 var app = builder.Build();
