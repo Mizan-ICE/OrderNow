@@ -23,11 +23,15 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<ICartService,CartService>();
+
 builder.Services.AddScoped<IApplicationUnitOfWork, ApplicationUnitOfWork>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AddDbContext<OrderNowDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("OrdernNowConn"), (x) => x.MigrationsAssembly(migrationAssembly)));
-builder.Services.AddScoped<ICartItemRepository, CartRepository>(sp => CartRepository.GetCart(sp));
+builder.Services.AddScoped<ICartRepository, CartRepository>(sp => CartRepository.GetCart(sp));
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 
@@ -44,6 +48,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 

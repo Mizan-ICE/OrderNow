@@ -7,23 +7,32 @@ using OrderNow.Domain;
 using OrderNow.Domain.Repositories;
 
 namespace OrderNow.Infrastructure;
-public class ApplicationUnitOfWork: UnitOfWork,IApplicationUnitOfWork
+public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
 {
     private readonly OrderNowDbContext _context;
     public ApplicationUnitOfWork(OrderNowDbContext context,
         ICustomerRepository customerRepository,
         ICategoryRepository categoryRepository,
-        IProductRepository productRepository) :base(context)
+        IProductRepository productRepository,
+        IOrderRepository oderRepository,
+        ICartRepository cartRepository
+        ) : base(context)
     {
-       _context = context; 
-        CustomerRepository= customerRepository;
-        CategoryRepository= categoryRepository;
-        ProductRepository= productRepository;
+        _context = context;
+        CustomerRepository = customerRepository;
+        CategoryRepository = categoryRepository;
+        ProductRepository = productRepository;
+        OrderRepository = oderRepository;
+        CartRepository = cartRepository;
     }
 
     public ICustomerRepository CustomerRepository { get; private set; }
 
-    public ICategoryRepository CategoryRepository {  get; private set; }
+    public ICategoryRepository CategoryRepository { get; private set; }
 
-    public IProductRepository ProductRepository {  get; private set; }
+    public IProductRepository ProductRepository { get; private set; }
+
+    public IOrderRepository OrderRepository { get; private set; }
+
+    public ICartRepository CartRepository { get; private set; }
 }

@@ -3,8 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OrderNow.Domain.Entities;
 
 namespace OrderNow.Domain.Repositories;
-internal interface ICartRepository
+public interface ICartRepository
 {
+    void AddToCart(Product product);
+    int RemoveFromCart(Product product);
+    List<CartItem> GetCartItems();
+    void ClearCart();
+    decimal GetCartTotalPrice();
+    List<CartItem> CartItems { get; set; }
 }

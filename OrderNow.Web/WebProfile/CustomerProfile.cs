@@ -11,6 +11,7 @@ public class OrderProfile:Profile
         CreateMap<Customer,CustomerVM>().ReverseMap();
         CreateMap<Category,CategoryVm>().ReverseMap();
         CreateMap<Product,ProductVM>().ReverseMap();
+        CreateMap<CartItem,CartItemVM>().ReverseMap();
 
     }
 }

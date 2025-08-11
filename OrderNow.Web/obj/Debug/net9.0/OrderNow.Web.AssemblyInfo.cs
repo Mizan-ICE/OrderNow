@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OrderNow.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b71b9364b4ffa72a73337e6e6b8fb514e2419050")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+13da74ef73c3e2bba05d43aa37adc959b70776fd")]
 [assembly: System.Reflection.AssemblyProductAttribute("OrderNow.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OrderNow.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

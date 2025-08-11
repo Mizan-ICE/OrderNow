@@ -11,5 +11,7 @@ public interface IApplicationUnitOfWork:IUnitOfWork
     public ICustomerRepository CustomerRepository { get; }
     public ICategoryRepository CategoryRepository { get; }
     public IProductRepository ProductRepository { get; }
-    
+    public IOrderRepository OrderRepository { get; }
+    public ICartRepository CartRepository { get; }
+
 }

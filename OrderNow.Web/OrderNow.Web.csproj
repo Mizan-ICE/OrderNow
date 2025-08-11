@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -21,6 +21,11 @@
     <ProjectReference Include="..\OrderNow.Application\OrderNow.Application.csproj" />
     <ProjectReference Include="..\OrderNow.Domain\OrderNow.Domain.csproj" />
     <ProjectReference Include="..\OrderNow.Infrastructure\OrderNow.Infrastructure.csproj" />
+	  <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Models\ViewModel\CartItemVM.cs" />
   </ItemGroup>
 
 </Project>
