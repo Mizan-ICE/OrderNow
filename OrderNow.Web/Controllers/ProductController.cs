@@ -55,6 +55,52 @@ public class ProductController : Controller
 
         return View(viewModel);
     }
+
+    public async Task<IActionResult> Details(int id)
+    {
+        var product = await _productService.GetProductByIdAsync(id);
+        var viewproduct=_mapper.Map<ProductVM>(product);    
+        if(product == null)
+        {
+            return NotFound();
+        }
+        return View(viewproduct);
+    }
+    public async Task<IActionResult> Edit(int id)
+    {
+        var product = await _productService.GetProductByIdAsync(id);
+        if (product == null)
+        {
+            return NotFound();
+        }
+        var viewModel = _mapper.Map<ProductVM>(product);
+        viewModel.Categories = await _categoryService.AllCategoriesAsync();
+        return View(viewModel);
+    }
+    [HttpPost]
+    public async Task<IActionResult> Edit(ProductVM viewModel)
+    {
+        if (ModelState.IsValid)
+        {
+            var product = _mapper.Map<Product>(viewModel);
+            await _productService.UpdateProductAsync(product);
+            TempData["ProductUpdated"] = "Product has been updated.";
+            return RedirectToAction("ProductList");
+        }
+        // If validation fails, re-populate categories
+        viewModel.Categories = await _categoryService.AllCategoriesAsync();
+        return View(viewModel);
+    }
+    public async Task<IActionResult> Delete(int id)
+    {
+        var product = await _productService.GetProductByIdAsync(id);
+        if(product ==null)
+        {
+            return NotFound();
+        }
+        await _productService.DeleteProductAsync(id);
+        return RedirectToAction("ProductList");
+    }
 }
 
 

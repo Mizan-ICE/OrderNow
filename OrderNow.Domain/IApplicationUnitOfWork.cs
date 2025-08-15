@@ -13,5 +13,6 @@ public interface IApplicationUnitOfWork:IUnitOfWork
     public IProductRepository ProductRepository { get; }
     public IOrderRepository OrderRepository { get; }
     public ICartRepository CartRepository { get; }
+    public ISupplierRepository SupplierRepository { get; }
 
 }

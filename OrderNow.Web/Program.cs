@@ -7,6 +7,7 @@ using OrderNow.Domain.Repositories;
 using OrderNow.Domain.Services;
 using OrderNow.Infrastructure;
 using OrderNow.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,13 +25,18 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<ICartRepository, CartRepository>();
 builder.Services.AddScoped<ICartService,CartService>();
+builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
+
 
 builder.Services.AddScoped<IApplicationUnitOfWork, ApplicationUnitOfWork>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AddDbContext<OrderNowDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("OrdernNowConn"), (x) => x.MigrationsAssembly(migrationAssembly)));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<OrderNowDbContext>();
 builder.Services.AddScoped<ICartRepository, CartRepository>(sp => CartRepository.GetCart(sp));
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
@@ -57,8 +63,10 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Product}/{action=ProductList}/{id?}")
     .WithStaticAssets();
 
+app.MapRazorPages()
+   .WithStaticAssets();
 
 app.Run();

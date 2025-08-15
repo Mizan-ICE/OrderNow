@@ -15,7 +15,8 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
         ICategoryRepository categoryRepository,
         IProductRepository productRepository,
         IOrderRepository oderRepository,
-        ICartRepository cartRepository
+        ICartRepository cartRepository,
+        ISupplierRepository supplierRepository
         ) : base(context)
     {
         _context = context;
@@ -24,6 +25,7 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
         ProductRepository = productRepository;
         OrderRepository = oderRepository;
         CartRepository = cartRepository;
+        SupplierRepository = supplierRepository;
     }
 
     public ICustomerRepository CustomerRepository { get; private set; }
@@ -35,4 +37,6 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
     public IOrderRepository OrderRepository { get; private set; }
 
     public ICartRepository CartRepository { get; private set; }
+
+    public ISupplierRepository SupplierRepository { get; private set; }
 }

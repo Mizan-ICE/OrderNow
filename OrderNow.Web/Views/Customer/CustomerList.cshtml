@@ -6,8 +6,6 @@
 
 <h1>Customer List</h1>
 
-<a class="btn btn-primary btn-sm" asp-controller="Customer" asp-action="Add">Add New</a>
-
 <partial name="_DeleteModalPartial" />
 <table class="table" id="customer">
     <thead>
@@ -88,4 +86,6 @@
          });
     </script>
 }
+@await Html.PartialAsync("_CreateProduct", "Customer")
+
 

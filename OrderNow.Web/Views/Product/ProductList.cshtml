@@ -4,61 +4,53 @@
     ViewData["Title"] = "Product List";
 }
 
-<div class="row">
-    @foreach (var item in Model)
-    {
-        <div class="col-md-4 border-primary mb-3">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-12">
-                        <div class="card-header text-light bg-info">
-                            <h5 class="card-title">
-                                @item.ProductName
-                               
-                                    <a class="text-light float-end" asp-action="Update" asp-route-id="@item.Id">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </a>
-                                
-                            </h5>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
+<div class="container my-4">
+    <div class="row g-3">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="position-relative">
                         @if (!string.IsNullOrEmpty(item.ProductImageUrl))
                         {
-                            <img src="@item.ProductImageUrl" class="img-fluid" alt="@item.ProductName" />
+                            <img src="@item.ProductImageUrl" class="card-img-top" style="height: 200px; object-fit: contain;" alt="@item.ProductName" />
                         }
                         else
                         {
-                            <img src="~/images/no-image.png" class="img-fluid" alt="No Image" />
+                            <img src="~/images/no-image.png" class="card-img-top" style="height: 200px; object-fit: contain;" alt="No Image" />
                         }
+
+                        <a class="btn btn-sm btn-light position-absolute top-0 end-0 m-1"
+                           asp-action="Edit" asp-route-id="@item.Id" title="Edit">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
                     </div>
 
-                    <div class="col-md-6">
-                        <div class="card-body">
-                            <p class="card-text">@item.ProductDescription</p>
-                            <p class="card-text"><b>Category:</b> @item.CategoryId</p>
-                            <p class="card-text"><b>Price:</b> @item.Price.ToString("c")</p>
+                    <div class="card-body text-center">
+                        <h6 class="card-title fw-bold">@item.ProductName</h6>
+                       @*  <p class="text-muted mb-1">@item.ProductDescription</p> *@
+                        <p class="mb-1"><small><b>Category:</b> @item.CategoryId</small></p>
+                        <div class="fw-bold text-danger">
+                            <span style="font-weight: 900;">৳</span>@item.Price.ToString("N2")
                         </div>
                     </div>
 
-                    <div class="col-md-12">
-                        <div class="card-footer">
-                            <p class="card-text">
-                                <a class="btn btn-outline-primary float-end" asp-action="Details" asp-route-id="@item.Id">
-                                    <i class="bi bi-eye-fill"></i> Show Details
-                                </a>
-                                <a class="btn btn-success text-light"
-                                   asp-controller="Cart"
-                                   asp-action="AddToCart"
-                                   asp-route-id="@item.Id">
-                                    <i class="bi bi-cart-plus"></i> Add to Cart
-                                </a>
-                            </p>
-                        </div>
+                    <div class="card-footer bg-white border-0 d-flex justify-content-between">
+                        <a class="btn btn-outline-primary btn-sm"
+                           asp-action="Details" asp-route-id="@item.Id">
+                            <i class="bi bi-eye-fill"></i> Details
+                        </a>
+                        <a class="btn btn-success btn-sm text-light"
+                           asp-controller="Cart"
+                           asp-action="AddToCart"
+                           asp-route-id="@item.Id">
+                            <i class="bi bi-cart-plus"></i> Add
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 </div>
+
+@await Html.PartialAsync("_CreateProduct", "Product")

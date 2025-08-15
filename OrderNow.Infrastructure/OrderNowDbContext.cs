@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OrderNow.Domain.Entities;
 
 namespace OrderNow.Infrastructure;
-public class OrderNowDbContext:DbContext
+public class OrderNowDbContext:IdentityDbContext
 {
     public OrderNowDbContext(DbContextOptions<OrderNowDbContext>options):base(options)
     {
