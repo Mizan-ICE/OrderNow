@@ -1,0 +1,60 @@
+﻿@using OrderNow.Web.Models
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+@{
+    ViewData["Title"] = "Sign up for new account";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h4 class="mb-3">Sign up for new account</h4>
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger">
+                <strong>Sorry!</strong> - @TempData["Error"]
+            </div>
+        }
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <form asp-action="Register" asp-route-returnUrl="@Model.ReturnUrl">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                  
+                    <div class="mb-3">
+                        <label asp-for="FullName" class="form-label"></label>
+                        <input asp-for="FullName" class="form-control" />
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label asp-for=" EmailAddress " class="form-label"></label>
+                        <input asp-for=" EmailAddress " class="form-control" />
+                        <span asp-validation-for=" EmailAddress " class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Password" class="form-label"></label>
+                        <input asp-for="Password" type="password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label asp-for="ConfirmPassword" class="form-label"></label>
+                        <input asp-for="ConfirmPassword" type="password" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a class="btn btn-outline-secondary" asp-controller="Movies" asp-action="Index">Cancel</a>
+                        <button type="submit" class="btn btn-success">Sign Up</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

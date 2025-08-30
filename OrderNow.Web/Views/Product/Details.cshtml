@@ -1,0 +1,59 @@
+﻿@model OrderNow.Web.Models.ViewModel.ProductVM
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+<div class="container">
+
+
+    <h1 class="my-4">@Model.ProductName</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <img class="img-fluid" src="@Model.ProductImageUrl" alt="@Model.ProductName">
+        </div>
+        <div class="col-md-6">
+            <h3 class="my-3">Product Description</h3>
+            <p>@Model.ProductDescription</p>
+            <h3 class="my-3">Product Details</h3>
+            <ul>
+                <li>Price: $@Model.Price</li>
+                <!-- Add more details as needed -->
+            </ul>
+            <a class="btn btn-success" asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Update product</a>
+            <a href="#"
+                button type="button"
+               class="btn btn-danger open-delete-modal"
+               data-id="@Model.Id"
+               data-url="@Url.Action("Delete", "Product", new { id = Model.Id })">
+                Delete product
+            </a>
+            <a class="btn btn-primary"  asp-controller="Product" asp-action="Add" class="btn btn-primary btn-green">Add new product</a>
+            <a class="btn btn-dark"  asp-controller="Product" asp-action="ProductList" class="btn btn-primary">Back to Products list</a>
+
+            <partial name="_DeleteModalPartial" />
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+
+    <script>
+              $(document).ready(function () {
+            $('.open-delete-modal').on('click', function (e) {
+                e.preventDefault(); // stop navigation
+                var id = $(this).data('id');
+                var url = $(this).data('url');
+
+                $('#delete-id').val(id);
+                $('#delete-form').attr('action', url);
+                $('#modal-delete').modal('show');
+            });
+
+            $('#delete-button').on('click', function () {
+                $('#delete-form').submit();
+            });
+        });
+    </script>
+}

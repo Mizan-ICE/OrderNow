@@ -1,0 +1,96 @@
+﻿@model List<OrderNow.Domain.Entities.Order>
+
+@{
+    ViewData["Title"] = "My Orders";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css">
+
+}
+
+<h1 class="mb-4">My Orders</h1>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-info">You haven't placed any orders yet.</div>
+}
+else
+{
+    <div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+    <table class="table table-striped table-bordered" id="orderitem">
+        <thead>
+            <tr>
+                <th>Order #</th>
+                <th>Date</th>
+                <th>Total Items</th>
+                <th>Total Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                var totalItems = order.OrderItems?.Sum(i => i.Quantity) ?? 0;
+                var totalPrice = order.OrderItems?.Sum(i => i.TotalPrice) ?? 0;
+
+                <tr>
+                    <td>@order.Id</td>
+                    <td>@order.OrderPlaced.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>@totalItems</td>
+                                    <td>
+                                        <div class="fw-bold text-dark">
+                                            <span style="font-weight: 900;">৳</span>@totalPrice.ToString("N2")
+                                        </div>
+                                    </td>
+                    <td>@order.OrderTotal</td>
+                                
+                </tr>
+            }
+        </tbody>
+    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/3.1.0/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/3.1.0/js/buttons.html5.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/3.1.0/js/buttons.print.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#orderitem').DataTable({
+        
+                responsive: true,
+                lengthChange: true,
+                autoWidth: false,
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, 'All']
+                ],
+                    layout: {
+                    topStart: 'buttons',  // Buttons on the Left
+                    topEnd: 'search',     // Search Bar on the Right
+                },
+        
+                    buttons: [
+                        'copy', 'csv', 'excel', 'pdf', 'print'
+                    ]
+                });
+            });
+        </script>
+
+
+	}
+}
