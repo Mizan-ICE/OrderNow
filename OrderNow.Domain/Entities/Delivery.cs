@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OrderNow.Domain.Identity;
 
 namespace OrderNow.Domain.Entities;
 public class Delivery : IEntity
@@ -25,6 +27,7 @@ public class Delivery : IEntity
     public DateTime Date { get; set; }
 
     [Required]
-    public int CustomerId { get; set; }
-    public Customer? Customer { get; set; } = default!;
+    public string UserId { get; set; }
+    [ForeignKey(nameof(UserId))]
+    public ApplicationUser User { get; set; }
 }

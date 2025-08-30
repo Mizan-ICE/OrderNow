@@ -8,18 +8,45 @@ using OrderNow.Domain.Services;
 using OrderNow.Infrastructure;
 using OrderNow.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
+using Serilog;
+using Serilog.Events;
+using OrderNow.Infrastructure.Seed;
+using OrderNow.Domain.Identity;
+using System;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
-var builder = WebApplication.CreateBuilder(args);
+var configuration = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json")
+    .Build();
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(configuration)
+    .CreateBootstrapLogger();
+
+try { 
+    Log.Information("Starting OrderNow.Web application...");
+    var builder = WebApplication.CreateBuilder(args);
 
 var migrationAssembly = Assembly.GetExecutingAssembly();
-#region AutoMappe
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+#region Serilog
+builder.Host.UseSerilog((context, lc) => lc
+.MinimumLevel.Debug()
+.MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+.Enrich.FromLogContext()
+.ReadFrom.Configuration(builder.Configuration));
 #endregion
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<ICustomerRepository,CustomerRepository>();
-builder.Services.AddScoped<ICustomerService, CustomerService>();
+#region AutoMappe
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+    #endregion
+
+
+ //#region Identity
+ //builder.Services.AddIdentity();
+ //   #endregion
+
+    // Add services to the container.
+    builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
@@ -34,10 +61,19 @@ builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
 builder.Services.AddScoped<IApplicationUnitOfWork, ApplicationUnitOfWork>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-builder.Services.AddDbContext<OrderNowDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("OrdernNowConn"), (x) => x.MigrationsAssembly(migrationAssembly)));
+builder.Services.AddDbContext<OrderNowDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("OrderNowConn"), (x) => x.MigrationsAssembly(migrationAssembly)));
+    builder.Services.AddRazorPages();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<OrderNowDbContext>();
-builder.Services.AddScoped<ICartRepository, CartRepository>(sp => CartRepository.GetCart(sp));
+    builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<OrderNowDbContext>().AddDefaultTokenProviders(); ;
+   builder.Services.AddMemoryCache();
+   builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    });
+
+
+
+    builder.Services.AddScoped<ICartRepository, CartRepository>(sp => CartRepository.GetCart(sp));
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 
@@ -57,7 +93,9 @@ app.UseRouting();
 
 app.UseSession();
 
-app.UseAuthorization();
+    app.UseAuthentication();
+
+    app.UseAuthorization();
 
 app.MapStaticAssets();
 
@@ -66,7 +104,20 @@ app.MapControllerRoute(
     pattern: "{controller=Product}/{action=ProductList}/{id?}")
     .WithStaticAssets();
 
-app.MapRazorPages()
+ApplicationSeed.Seed(app);
+ApplicationSeed.SeedUsersAndRolesAsync(app).Wait();
+    app.MapRazorPages()
    .WithStaticAssets();
 
-app.Run();
+
+
+    app.Run();
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Application start-up failed");
+}
+finally
+{
+    Log.CloseAndFlush();
+}

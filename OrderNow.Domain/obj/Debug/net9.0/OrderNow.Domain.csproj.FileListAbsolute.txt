@@ -22,3 +22,4 @@ D:\OrderNow\OrderNow.Domain\obj\Debug\net9.0\OrderNow.Domain.dll
 D:\OrderNow\OrderNow.Domain\obj\Debug\net9.0\refint\OrderNow.Domain.dll
 D:\OrderNow\OrderNow.Domain\obj\Debug\net9.0\OrderNow.Domain.pdb
 D:\OrderNow\OrderNow.Domain\obj\Debug\net9.0\ref\OrderNow.Domain.dll
+D:\OrderNow\OrderNow.Domain\obj\Debug\net9.0\OrderNow.Domain.csproj.AssemblyReference.cache

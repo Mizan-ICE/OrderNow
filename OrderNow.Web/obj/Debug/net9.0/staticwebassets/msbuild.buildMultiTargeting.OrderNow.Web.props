@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\OrderNow.Web.props" />
-</Project>

@@ -11,6 +11,7 @@
           "Microsoft.AspNetCore.Http.Abstractions": "2.3.0",
           "Microsoft.AspNetCore.Http.Extensions": "2.3.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.8",
+          "Microsoft.AspNetCore.Identity.UI": "9.0.8",
           "Microsoft.EntityFrameworkCore": "9.0.8",
           "OrderNow.Domain": "1.0.0"
         },
@@ -41,37 +42,19 @@
         "dependencies": {
           "Microsoft.AspNetCore.Http.Features": "2.3.0",
           "System.Text.Encodings.Web": "8.0.0"
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Abstractions.dll": {
-            "assemblyVersion": "2.3.0.0",
-            "fileVersion": "2.3.0.25014"
-          }
         }
       },
       "Microsoft.AspNetCore.Http.Extensions/2.3.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Http.Abstractions": "2.3.0",
-          "Microsoft.Extensions.FileProviders.Abstractions": "8.0.0",
+          "Microsoft.Extensions.FileProviders.Abstractions": "9.0.8",
           "Microsoft.Net.Http.Headers": "2.3.0",
           "System.Buffers": "4.6.0"
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Extensions.dll": {
-            "assemblyVersion": "2.3.0.0",
-            "fileVersion": "2.3.0.25014"
-          }
         }
       },
       "Microsoft.AspNetCore.Http.Features/2.3.0": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "9.0.8"
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Features.dll": {
-            "assemblyVersion": "2.3.0.0",
-            "fileVersion": "2.3.0.25014"
-          }
         }
       },
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore/9.0.8": {
@@ -81,6 +64,18 @@
         },
         "runtime": {
           "lib/net9.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll": {
+            "assemblyVersion": "9.0.8.0",
+            "fileVersion": "9.0.825.36808"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Identity.UI/9.0.8": {
+        "dependencies": {
+          "Microsoft.Extensions.FileProviders.Embedded": "9.0.8",
+          "Microsoft.Extensions.Identity.Stores": "9.0.8"
+        },
+        "runtime": {
+          "lib/net9.0/Microsoft.AspNetCore.Identity.UI.dll": {
             "assemblyVersion": "9.0.8.0",
             "fileVersion": "9.0.825.36808"
           }
@@ -179,14 +174,25 @@
           }
         }
       },
-      "Microsoft.Extensions.FileProviders.Abstractions/8.0.0": {
+      "Microsoft.Extensions.FileProviders.Abstractions/9.0.8": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "9.0.8"
         },
         "runtime": {
-          "lib/net8.0/Microsoft.Extensions.FileProviders.Abstractions.dll": {
-            "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.23.53103"
+          "lib/net9.0/Microsoft.Extensions.FileProviders.Abstractions.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.825.36511"
+          }
+        }
+      },
+      "Microsoft.Extensions.FileProviders.Embedded/9.0.8": {
+        "dependencies": {
+          "Microsoft.Extensions.FileProviders.Abstractions": "9.0.8"
+        },
+        "runtime": {
+          "lib/net9.0/Microsoft.Extensions.FileProviders.Embedded.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.825.36808"
           }
         }
       },
@@ -264,17 +270,14 @@
         "dependencies": {
           "Microsoft.Extensions.Primitives": "9.0.8",
           "System.Buffers": "4.6.0"
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.Net.Http.Headers.dll": {
-            "assemblyVersion": "2.3.0.0",
-            "fileVersion": "2.3.0.25014"
-          }
         }
       },
       "System.Buffers/4.6.0": {},
       "System.Text.Encodings.Web/8.0.0": {},
       "OrderNow.Domain/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.8"
+        },
         "runtime": {
           "OrderNow.Domain.dll": {
             "assemblyVersion": "1.0.0.0",
@@ -331,6 +334,13 @@
       "sha512": "sha512-z4q9roxXMQePwFM5tXXZS5sKkU78yYXVkj56NYYx9xKe+mxGkJMV1MaO0GFE6HnnM8bE3Xxhs0hAPw2jKbse6w==",
       "path": "microsoft.aspnetcore.identity.entityframeworkcore/9.0.8",
       "hashPath": "microsoft.aspnetcore.identity.entityframeworkcore.9.0.8.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Identity.UI/9.0.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Luw13WeJQejnNKfB3raQn995CX/FSwU29p+1Q7YSDltnaf1Fy9jm36FCk8W2LOsZxqOludLxbSsItlfoZu1z7g==",
+      "path": "microsoft.aspnetcore.identity.ui/9.0.8",
+      "hashPath": "microsoft.aspnetcore.identity.ui.9.0.8.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore/9.0.8": {
       "type": "package",
@@ -395,12 +405,19 @@
       "path": "microsoft.extensions.dependencyinjection.abstractions/9.0.8",
       "hashPath": "microsoft.extensions.dependencyinjection.abstractions.9.0.8.nupkg.sha512"
     },
-    "Microsoft.Extensions.FileProviders.Abstractions/8.0.0": {
+    "Microsoft.Extensions.FileProviders.Abstractions/9.0.8": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ZbaMlhJlpisjuWbvXr4LdAst/1XxH3vZ6A0BsgTphZ2L4PGuxRLz7Jr/S7mkAAnOn78Vu0fKhEgNF5JO3zfjqQ==",
-      "path": "microsoft.extensions.fileproviders.abstractions/8.0.0",
-      "hashPath": "microsoft.extensions.fileproviders.abstractions.8.0.0.nupkg.sha512"
+      "sha512": "sha512-4zZbQ4w+hCMm9J+z5NOj3giIPT2MhZxx05HX/MGuAmDBbjOuXlYIIRN+t4V6OLxy5nXZIcXO+dQMB/OWubuDkw==",
+      "path": "microsoft.extensions.fileproviders.abstractions/9.0.8",
+      "hashPath": "microsoft.extensions.fileproviders.abstractions.9.0.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.FileProviders.Embedded/9.0.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LVm1o08C5eSB+WvhOEtp/cm/I3s7bCoYisTBYKgR3KEfHXkKfvkLPXfg4CNHYkxPqZ4T/XuGENDLtbhDywGFHA==",
+      "path": "microsoft.extensions.fileproviders.embedded/9.0.8",
+      "hashPath": "microsoft.extensions.fileproviders.embedded.9.0.8.nupkg.sha512"
     },
     "Microsoft.Extensions.Identity.Core/9.0.8": {
       "type": "package",

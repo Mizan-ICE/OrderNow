@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "HIth4tavdMk=",
+  "dgSpecHash": "1bIBjt0hwwA=",
   "success": true,
   "projectFilePath": "D:\\OrderNow\\OrderNow.Infrastructure\\OrderNow.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\mizan\\.nuget\\packages\\microsoft.aspnetcore.http.extensions\\2.3.0\\microsoft.aspnetcore.http.extensions.2.3.0.nupkg.sha512",
     "C:\\Users\\mizan\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.3.0\\microsoft.aspnetcore.http.features.2.3.0.nupkg.sha512",
     "C:\\Users\\mizan\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\9.0.8\\microsoft.aspnetcore.identity.entityframeworkcore.9.0.8.nupkg.sha512",
+    "C:\\Users\\mizan\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\9.0.8\\microsoft.aspnetcore.identity.ui.9.0.8.nupkg.sha512",
     "C:\\Users\\mizan\\.nuget\\packages\\microsoft.entityframeworkcore\\9.0.8\\microsoft.entityframeworkcore.9.0.8.nupkg.sha512",
     "C:\\Users\\mizan\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\9.0.8\\microsoft.entityframeworkcore.abstractions.9.0.8.nupkg.sha512",
     "C:\\Users\\mizan\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\9.0.8\\microsoft.entityframeworkcore.analyzers.9.0.8.nupkg.sha512",
@@ -19,7 +20,8 @@
     "C:\\Users\\mizan\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\9.0.8\\microsoft.extensions.configuration.abstractions.9.0.8.nupkg.sha512",
     "C:\\Users\\mizan\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\9.0.8\\microsoft.extensions.dependencyinjection.9.0.8.nupkg.sha512",
     "C:\\Users\\mizan\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.8\\microsoft.extensions.dependencyinjection.abstractions.9.0.8.nupkg.sha512",
-    "C:\\Users\\mizan\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\8.0.0\\microsoft.extensions.fileproviders.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\mizan\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\9.0.8\\microsoft.extensions.fileproviders.abstractions.9.0.8.nupkg.sha512",
+    "C:\\Users\\mizan\\.nuget\\packages\\microsoft.extensions.fileproviders.embedded\\9.0.8\\microsoft.extensions.fileproviders.embedded.9.0.8.nupkg.sha512",
     "C:\\Users\\mizan\\.nuget\\packages\\microsoft.extensions.identity.core\\9.0.8\\microsoft.extensions.identity.core.9.0.8.nupkg.sha512",
     "C:\\Users\\mizan\\.nuget\\packages\\microsoft.extensions.identity.stores\\9.0.8\\microsoft.extensions.identity.stores.9.0.8.nupkg.sha512",
     "C:\\Users\\mizan\\.nuget\\packages\\microsoft.extensions.logging\\9.0.8\\microsoft.extensions.logging.9.0.8.nupkg.sha512",

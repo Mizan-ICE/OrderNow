@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("OrderNow.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+76a7afcd1c24c542cb6c832c62546e88854ae3ac")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6d02ed7ae1f18c1243d62269cdfb2353f373dbcd")]
 [assembly: System.Reflection.AssemblyProductAttribute("OrderNow.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OrderNow.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

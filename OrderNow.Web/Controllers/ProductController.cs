@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OrderNow.Domain.Entities;
 using OrderNow.Domain.Services;
 using OrderNow.Web.Models.ViewModel;
 
 namespace OrderNow.Web.Controllers;
+[Authorize(Roles = "Admin")]
 public class ProductController : Controller
 {
     private readonly IProductService _productService;
@@ -22,6 +24,7 @@ public class ProductController : Controller
         _categoryService = categoryService;
         _mapper = mapper;
     }
+    [AllowAnonymous]
     public async Task<IActionResult> ProductList()
     {
       var product=await _productService.GetAllProduct();
@@ -55,7 +58,7 @@ public class ProductController : Controller
 
         return View(viewModel);
     }
-
+    [AllowAnonymous]
     public async Task<IActionResult> Details(int id)
     {
         var product = await _productService.GetProductByIdAsync(id);

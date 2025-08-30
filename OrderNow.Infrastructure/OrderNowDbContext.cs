@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OrderNow.Domain.Entities;
+using OrderNow.Domain.Identity;
+
+
 
 namespace OrderNow.Infrastructure;
-public class OrderNowDbContext:IdentityDbContext
+public class OrderNowDbContext: IdentityDbContext<ApplicationUser>
 {
     public OrderNowDbContext(DbContextOptions<OrderNowDbContext>options):base(options)
     {
         
     }
     public DbSet<Category> Categories { get; set; }
+
     public DbSet<Product> Products { get; set; }
-    public DbSet<Customer> Customers { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
     public DbSet<CartItem> CartItems { get; set; }
@@ -68,14 +66,9 @@ public class OrderNowDbContext:IdentityDbContext
             .HasForeignKey(o => o.ProductId)
             .OnDelete(DeleteBehavior.NoAction); // Modify this line
 
-        modelBuilder.Entity<Delivery>()
-            .HasOne(o => o.Customer)
-            .WithMany()
-            .HasForeignKey(o => o.CustomerId)
-            .OnDelete(DeleteBehavior.NoAction); // Modify this line
-
 
 
         base.OnModelCreating(modelBuilder);
     }
+   
 }

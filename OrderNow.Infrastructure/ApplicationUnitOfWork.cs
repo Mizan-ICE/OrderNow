@@ -11,7 +11,7 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
 {
     private readonly OrderNowDbContext _context;
     public ApplicationUnitOfWork(OrderNowDbContext context,
-        ICustomerRepository customerRepository,
+      
         ICategoryRepository categoryRepository,
         IProductRepository productRepository,
         IOrderRepository oderRepository,
@@ -20,7 +20,7 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
         ) : base(context)
     {
         _context = context;
-        CustomerRepository = customerRepository;
+      
         CategoryRepository = categoryRepository;
         ProductRepository = productRepository;
         OrderRepository = oderRepository;
@@ -28,7 +28,7 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
         SupplierRepository = supplierRepository;
     }
 
-    public ICustomerRepository CustomerRepository { get; private set; }
+  
 
     public ICategoryRepository CategoryRepository { get; private set; }
 
